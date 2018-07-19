@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.tranchau.manageuse.LivePreviewActivity;
 import com.tranchau.manageuse.R;
 import com.tranchau.manageuse.StillImageActivity;
@@ -39,6 +41,9 @@ public class MainActivity extends AppCompatActivity
                     R.string.desc_camera_source_activity, R.string.desc_still_image_activity,
             };
 
+    private FloatingActionButton faLogOut;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,12 +53,22 @@ public class MainActivity extends AppCompatActivity
 
         // Set up ListView and Adapter
         ListView listView = (ListView) findViewById(R.id.test_activity_list_view);
+        faLogOut = findViewById(R.id.faLogOut);
 
         MyArrayAdapter adapter = new MyArrayAdapter(this, android.R.layout.simple_list_item_2, CLASSES);
         adapter.setDescriptionIds(DESCRIPTION_IDS);
 
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(this);
+
+        faLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(getApplicationContext(), LogInActivity.class));
+                finish();
+            }
+        });
 
         if (!allPermissionsGranted()) {
             getRuntimePermissions();

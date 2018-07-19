@@ -34,7 +34,12 @@
         </activity>
         <activity android:name=".view.SignUpActivity"
             android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".view.MainActivity"></activity>
+        <activity android:name=".LivePreviewActivity" android:exported="true">
+        </activity>
+
+        <activity android:name=".StillImageActivity"
+            android:exported="true"/>
+        <activity android:name=".view.MainActivity"/>
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.my.package.name.provider"

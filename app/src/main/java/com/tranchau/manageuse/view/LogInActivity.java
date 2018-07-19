@@ -1,5 +1,6 @@
 package com.tranchau.manageuse.view;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -31,6 +32,8 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
 
     private FirebaseAuth mAuth;
     private DatabaseReference mData;
+
+    private ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +105,8 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         btnLogIn = findViewById(R.id.btnLogIn);
         edtPassword = findViewById(R.id.edtPassword);
         edtUserName = findViewById(R.id.edtUserName);
+        dialog = new ProgressDialog(this);
+        dialog.setMessage("Loading...");
     }
 
     @Override
@@ -149,6 +154,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
             case R.id.tvForgotPassword:
                 break;
             case R.id.btnLogIn:
+                dialog.show();
                 String email = edtUserName.getText().toString();
                 String password = edtPassword.getText().toString();
                 mAuth.signInWithEmailAndPassword(email, password)
@@ -158,11 +164,15 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
                                 if (task.isSuccessful()) {
                                     // Sign in success, update UI with the signed-in user's information
                                     FirebaseUser user = mAuth.getCurrentUser();
-                                    finish();
                                     startActivity(new Intent(LogInActivity.this, MainActivity.class));
+                                    finish();
+                                    dialog.dismiss();
+                                    dialog.cancel();
                                 } else {
                                     // If sign in fails, display a message to the user.
-                                    Toast.makeText(LogInActivity.this, "Lỗi đăng nhập, vui long thử lại sau!", Toast.LENGTH_SHORT).show();
+                                    dialog.dismiss();
+                                    dialog.cancel();
+                                    Toast.makeText(LogInActivity.this, "Lỗi đăng nhập, vui lòng thử lại sau!", Toast.LENGTH_SHORT).show();
                                 }
 
                                 // ...

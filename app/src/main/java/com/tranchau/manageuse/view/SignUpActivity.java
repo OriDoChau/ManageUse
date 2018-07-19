@@ -1,5 +1,6 @@
 package com.tranchau.manageuse.view;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -35,6 +36,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     private FirebaseAuth mAuth;
     private DatabaseReference mData;
+    private ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +61,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         btSignUp = findViewById(R.id.btnSignUp);
         edtPassword = findViewById(R.id.edtPassword);
         edtUserName = findViewById(R.id.edtUserName);
+        dialog = new ProgressDialog(this);
+        dialog.setMessage("Loading...");
         validateInput();
+
     }
 
     private void validateInput(){
@@ -151,6 +156,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 startActivity(new Intent(this, LogInActivity.class));
                 break;
             case R.id.btnSignUp:
+                dialog.show();
                 String username = edtUserName.getText().toString().trim();
                 String password = edtPassword.getText().toString().trim();
                 boolean flag = checkInput(username, password);
@@ -220,6 +226,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             mData.child("user").child(user.getUid()).setValue(email);
                             finish();
                             startActivity(new Intent(SignUpActivity.this, LogInActivity.class));
+                            dialog.dismiss();
+                            dialog.cancel();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
@@ -228,6 +236,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             //updateUI(null);
                             edtUserName.setText(null);
                             edtPassword.setText(null);
+                            dialog.dismiss();
+                            dialog.cancel();
                         }
 
                         // ...
