@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "577983214702",
+    "firebase_url": "https://manageuser-v1.firebaseio.com",
+    "project_id": "manageuser-v1",
+    "storage_bucket": "manageuser-v1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:577983214702:android:5fbfe11560ab8856",
+        "android_client_info": {
+          "package_name": "com.tranchau.manageuse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "577983214702-ribdu8mrd28tguaptgsmqoso74pn1o21.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tranchau.manageuse",
+            "certificate_hash": "7f772481e7eec343c8cc898ff4bb912a84e60eb0"
+          }
+        },
+        {
+          "client_id": "577983214702-amogb108cd63rgm8pj84cl30bc2mvj2h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdXRDH7emFCy4IKFcEV3PQ0YQ0_yvAaUc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "577983214702-amogb108cd63rgm8pj84cl30bc2mvj2h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
